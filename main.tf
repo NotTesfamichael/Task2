@@ -38,6 +38,12 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
+resource "aws_cloudwatch_log_group" "lambda_logs" {
+  name              = "/aws/lambda/get_lambda_function"
+  retention_in_days = 1
+}
+
+
 resource "aws_lambda_function" "get_lambda" {
   function_name    = "get_lambda_function"
   role             = aws_iam_role.lambda_role.arn
